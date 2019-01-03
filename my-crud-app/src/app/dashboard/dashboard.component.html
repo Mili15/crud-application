@@ -1,0 +1,53 @@
+<nav class="navbar navbar-dark bg-dark">
+    <a>My Crud App</a>
+</nav>
+<div class="container">
+    <div class="text-center">
+        <img src="./assets/image/logo.jpg" class="img-fluid" />
+    </div>
+    <div id="form">
+        <form [formGroup]="taskForm">
+            <div formArrayName="taskRows">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let itemrow of taskForm.controls.taskRows.controls; let i=index" [formGroupName]='i'>
+                            <td>
+                                <input formControlName="title" class="form-control">
+                            </td>
+                            <td>
+                                <input formControlName="description" class="form-control">
+                            </td>
+                            <td>
+                                <button *ngIf="items.documents[i] && items.documents[i].name; else update" (click)="deleteTask(items.documents[i].name)"
+                                    class="btn btn-danger"> Delete</button>
+                                <ng-template #update>
+                                    <button (click)="updateRow(itemrow)" class="btn btn-primary">Update</button>
+                                </ng-template>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <button type="button" (click)="addNewRow()" class="btn btn-primary">Add New Row</button>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<footer class="fixed-bottom navbar navbar-light bg-light">
+    <a class="navbar-brand center">Designed and coded by Milind Sharma</a>
+</footer>
